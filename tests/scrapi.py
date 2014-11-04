@@ -2,7 +2,6 @@ __author__ = 'Marvin Laske'
 
 import unittest
 import os
-import thread
 from scrapyd_api.scrapi import ScrapydApi
 
 
@@ -11,12 +10,10 @@ class ScrapydApiTests(unittest.TestCase):
         os.system("scrapyd")
 
     def setUp(self):
-        os.system("sudo pip install scrapyd")
-        self.scrapyd_thread = thread.start_new_thread(self.start_scrapyd, [])
+        pass
 
     def tearDown(self):
-        self.scrapyd_process.terminate()
-        os.system("sudo pip uninstall scrapyd -y")
+        pass
 
     def test_if_clean_install(self):
         api = ScrapydApi("http://localhost:6800/")
