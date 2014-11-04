@@ -59,7 +59,7 @@ class ScrapydApi:
 
         :rtype : list
         """
-        testtt = urlparse.urljoin(self.scrapyd_url, "/listsprojects.json")
+        testtt = urlparse.urljoin(self.scrapyd_url, "/listprojects.json")
         print testtt
         return requests.get(testtt)
 

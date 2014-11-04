@@ -1,14 +1,10 @@
 __author__ = 'Marvin Laske'
 
 import unittest
-import os
 from scrapyd_api.scrapi import ScrapydApi
 
 
 class ScrapydApiTests(unittest.TestCase):
-    def start_scrapyd(self):
-        os.system("scrapyd")
-
     def setUp(self):
         pass
 
