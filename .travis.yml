@@ -4,6 +4,8 @@ python:
 
 install:
     - "pip install scrapyd"
+    - "pip install requests"
+    - "pip install cherrypy"
 
 before_script:
     - "scrapyd &"

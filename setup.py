@@ -12,5 +12,5 @@ setup(
     license='MIT License',
     author=__author__,
     description='A lightweight web interface for managing scrapy cralwers deployed with scrapyd',
-    requires=["cherrypy"]
+    requires=["cherrypy", "requests"]
 )
