@@ -2,6 +2,7 @@ __author__ = 'Marvin Laske'
 
 import requests
 import urlparse
+from json import loads
 
 
 class ScrapydApi:
@@ -24,6 +25,17 @@ class ScrapydApi:
         :param project_name: name of the project to which the egg shall be uploaded
         :param version: version string of the egg
         :param python_egg_path: file path to the egg that shall be uploaded
+        """
+        pass
+
+    def del_version(self, project_name, version):
+        """
+        Deletes a version of a project
+
+        :type version: str
+        :type project_name: str
+        :param project_name: name of the project
+        :param version: projectversion
         """
         pass
 
@@ -59,9 +71,23 @@ class ScrapydApi:
 
         :rtype : list
         """
-        testtt = urlparse.urljoin(self.scrapyd_url, "/listprojects.json")
-        print testtt
-        return requests.get(testtt)
+        url = urlparse.urljoin(self.scrapyd_url, "/listprojects.json")
+        response = requests.get(url)
+        if not response.ok:
+            raise IOError("response was not ok")
+
+        json = loads(response.text)
+
+        if not "status" in json:
+            raise IOError("status was not found")
+
+        if not json["status"] == "ok":
+            raise IOError("status was not ok")
+
+        if not "projects" in json:
+            raise IOError("projects was not found")
+
+        return json["projects"]
 
     def list_versions(self, project_name):
         """
