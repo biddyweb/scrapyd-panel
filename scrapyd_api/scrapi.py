@@ -19,6 +19,8 @@ class ScrapydApi:
         """
         Uploads a new version of a python egg to the scrapyd installation
 
+        :rtype: int
+        :return: returns the count of spiders that were count in the egg
         :type python_egg_path: str
         :type version: str
         :type project_name: str
@@ -26,7 +28,29 @@ class ScrapydApi:
         :param version: version string of the egg
         :param python_egg_path: file path to the egg that shall be uploaded
         """
-        pass
+        url = urlparse.urljoin(self.scrapyd_url, "/addversion.json")
+        response = requests.post(url, data={
+            "project": project_name,
+            "version": version
+        }, files={
+            "egg": open(python_egg_path, "rb")
+        })
+
+        if not response.ok:
+            raise IOError("response was not ok")
+
+        json = loads(response.text)
+
+        if not "status" in json:
+            raise IOError("status was not found")
+
+        if json["status"] != "ok":
+            raise IOError("status was not ok")
+
+        if not "spiders" in json:
+            raise IOError("spiders were not found")
+
+        return json["spiders"]
 
     def del_version(self, project_name, version):
         """
@@ -37,7 +61,22 @@ class ScrapydApi:
         :param project_name: name of the project
         :param version: projectversion
         """
-        pass
+        url = urlparse.urljoin(self.scrapyd_url, "/delversion.json")
+        response = requests.post(url, data={
+            "project": project_name,
+            "version": version
+        })
+
+        if not response.ok:
+            raise IOError("response was not ok")
+
+        json = loads(response.text)
+
+        if not "status" in json:
+            raise IOError("status was not found")
+
+        if json["status"] != "ok":
+            raise IOError("status was not ok")
 
     def schedule(self, project_name, spider_name, settings=None, **kwargs):
         """
@@ -81,7 +120,7 @@ class ScrapydApi:
         if not "status" in json:
             raise IOError("status was not found")
 
-        if not json["status"] == "ok":
+        if json["status"] != "ok":
             raise IOError("status was not ok")
 
         if not "projects" in json:
@@ -97,7 +136,26 @@ class ScrapydApi:
         :rtype : list
         :param project_name: name of the project
         """
-        pass
+        url = urlparse.urljoin(self.scrapyd_url, "/listversions.json")
+        response = requests.get(url, params={
+            "project": project_name
+        })
+
+        if not response.ok:
+            raise IOError("response was not ok")
+
+        json = loads(response.text)
+
+        if not "status" in json:
+            raise IOError("status was not found")
+
+        if json["status"] != "ok":
+            raise IOError("status was not ok")
+
+        if not "versions" in json:
+            raise IOError("versions were not found")
+
+        return json["versions"]
 
     def list_jobs(self, project_name):
         """

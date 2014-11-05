@@ -26,7 +26,8 @@ class ScrapydApiTests(unittest.TestCase):
         expected_version = "0.1a"
 
         api = self.initialize_api()
-        api.add_version(expected_name, expected_version, "TODO")
+        spiders = api.add_version(expected_name, expected_version, "TODO")
+        self.assertEqual(spiders, 2)
 
         projects = api.list_projects()
         self.assertEqual(len(projects), 1)
