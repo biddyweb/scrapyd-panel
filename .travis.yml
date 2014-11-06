@@ -3,12 +3,19 @@ python:
   - "2.7"
 
 install:
+    - "pip install scrapy"
     - "pip install scrapyd"
     - "pip install requests"
     - "pip install cherrypy"
 
 before_script:
     - nohup bash -c "scrapyd 2>&1 &"
+    - "mkdir dirbot"
+    - "cd dirbot"
+    - "git clone https://github.com/scrapy/dirbot.git"
+    - "python setup.py bdist_egg"
+    - "ls"
+    - "cd .."
 
 script:
     - "python -m unittest tests.dbsqlite"

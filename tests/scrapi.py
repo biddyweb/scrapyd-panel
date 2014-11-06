@@ -7,6 +7,8 @@ from time import sleep
 
 class ScrapydApiTests(unittest.TestCase):
     def setUp(self):
+        self.egg_path = "../dirbot/dist/"
+
         #waiting for scrapyd to start up
         #TODO: find a more reliable solution
         sleep(5)
@@ -26,7 +28,7 @@ class ScrapydApiTests(unittest.TestCase):
         expected_version = "0.1a"
 
         api = self.initialize_api()
-        spiders = api.add_version(expected_name, expected_version, "TODO")
+        spiders = api.add_version(expected_name, expected_version, self.egg_path)
         self.assertEqual(spiders, 2)
 
         projects = api.list_projects()
