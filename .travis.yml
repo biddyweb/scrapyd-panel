@@ -10,7 +10,10 @@ install:
 
 before_script:
     - nohup bash -c "scrapyd 2>&1 &"
+    - "mkdir dirbot"
+    - "ls"
     - "cd dirbot"
+    - "ls"
     - "git clone https://github.com/scrapy/dirbot.git"
     - "python setup.py bdist_egg"
     - "ls"
