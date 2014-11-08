@@ -12,10 +12,6 @@ before_script:
     - nohup bash -c "scrapyd 2>&1 &"
     - "git clone https://github.com/scrapy/dirbot.git"
     - "python dirbot/setup.py bdist_egg"
-    - "ls"
-    - "cd dist"
-    - "ls"
-    - "cd .."
 
 script:
     - "python -m unittest tests.dbsqlite"
