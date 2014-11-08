@@ -13,7 +13,7 @@ before_script:
     - "git clone https://github.com/scrapy/dirbot.git"
     - "python dirbot/setup.py bdist_egg"
     - "ls"
-    - "cd dirbot"
+    - "cd dist"
     - "ls"
     - "cd .."
 

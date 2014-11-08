@@ -3,11 +3,13 @@ __author__ = 'Marvin Laske'
 import unittest
 from scrapyd_api.scrapi import ScrapydApi
 from time import sleep
+import os
 
 
 class ScrapydApiTests(unittest.TestCase):
     def setUp(self):
         self.egg_path = "../dist/dirbot-1.0-py2.7.egg"
+        print os.getcwd()
 
         #waiting for scrapyd to start up
         #TODO: find a more reliable solution
