@@ -7,7 +7,7 @@ from time import sleep
 
 class ScrapydApiTests(unittest.TestCase):
     def setUp(self):
-        self.egg_path = "../dirbot/dist/dirbot-1.0-py2.7.egg"
+        self.egg_path = "../dist/dirbot-1.0-py2.7.egg"
 
         #waiting for scrapyd to start up
         #TODO: find a more reliable solution
